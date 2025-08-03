@@ -4,7 +4,7 @@ import os
 import requests
 
 TEMPLATE_PATH = './langs/en_us.lang'
-LANGS_DIR = './langs'
+LANGS_DIR = './langs/unchecked'
 GOOGLE_TRANSLATE_API_URL = 'https://translation.googleapis.com/language/translate/v2'
 API_KEY = 'YOUR_GOOGLE_API_KEY'  # Replace with your actual API key
 
@@ -33,7 +33,7 @@ def translate_text_batch(texts, target_lang):
         return texts  # fallback to original
 
 def write_translations(translations, target_lang):
-    out_path = os.path.join(LANGS_DIR, f'{target_lang}.lang')
+    out_path = os.path.join(LANGS_DIR, f'{target_lang}_{target_lang}.lang')
     with open(out_path, 'w', encoding='utf-8') as f:
         for key, value in translations:
             f.write(f"{key}={value}\n")
@@ -63,8 +63,7 @@ into the code. Note, that you should not post API keys to git")
     print(f"Translated file saved to {os.path.join(LANGS_DIR, f'{target_lang}_{target_lang}.lang')}")
 
 if __name__ == '__main__':
-    # major_languages = [ 'fr', 'ar',  'hi', 'ja', 'it', 'ko', 'tr', 'pl', 'cz']
-    main(target_lang = "it")
+    main(target_lang = "es") # Change to desired target language code
 
 
 
